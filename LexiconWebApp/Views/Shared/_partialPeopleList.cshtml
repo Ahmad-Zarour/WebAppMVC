@@ -1,0 +1,26 @@
+﻿
+@model List<PersonModel>
+
+
+<div class="container">
+    <div class="row row-cols-md-5 justify-content-md-between">
+
+        <div class="col-lg"><b> #</b></div>
+        <div class="col-bold">
+            <b>Name</b>
+        </div>
+        <div class="col-bold">
+            <b>Phone Number</b>
+        </div>
+        <div class="col-bold">
+            <b> City</b>
+        </div>
+        <div class="col-bold"><b>Action</b></div>
+    </div>
+</div>
+
+@{ foreach (PersonModel person in Model)
+                {
+    <partial name="_partialPersonList" model=person /> } }
+
+

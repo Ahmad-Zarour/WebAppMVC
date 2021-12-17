@@ -1,0 +1,18 @@
+﻿@model PersonModel
+
+<div class="row row-cols-md-5 justify-content-md-between" style="border:1px dashed black;">
+
+
+    <div class="col-md "> @Model.PersonId </div>
+    <div class="col-md"> @Model.FullName</div>
+    <div class="col-md">@Model.PhoneNumber</div>
+    <div class="col-md"> @Model.City.CityName</div> 
+
+
+            <div class="col-md">
+                <a class="btn btn-danger btn-sm fw-bold float-start" onclick="RemovePersonById(@Model.PersonId)"
+                   >Delete</a>
+            </div>
+
+        </div>
+

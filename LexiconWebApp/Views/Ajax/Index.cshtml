@@ -1,0 +1,40 @@
+﻿@{ ViewData["Title"] = "Ajax Person Page";
+    @model IEnumerable<LexiconWebApp.Models.CityModel>
+}
+
+<div class="container">
+
+    <h1>@ViewData["Title"]</h1>
+    <br />
+    <div>
+        <div class="row">
+            <div>
+                <div class="btn-group-lg">
+                    <input type="button" class="btn btn-info" onclick="GetPersonList()" value="Person List" />
+                    <div class="btn-group-lg accordion-button">
+                        <label for="personId" class="fw-bold ">Person Id : </label>
+                        <input id="personIdValue" type="number" />
+                        <input type="button" class="btn btn-link " onclick="FindPersonById()" value="Find Person" />
+                        <input type="button" class="btn btn-danger " onclick="RemovePersonById()" value="Delete Person By Id" />
+                    </div>
+                </div>
+                <div class="fw-bold font-monospace" id="messages"></div>
+            </div>
+            <div id="ListOfPerson"></div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @foreach (var city in Model)
+    {
+
+
+        @foreach (var person in city.PeopleList)
+        {
+        <br />
+        <a href="/city/1"> @person.FullName </a>
+        }
+    }
+</div>

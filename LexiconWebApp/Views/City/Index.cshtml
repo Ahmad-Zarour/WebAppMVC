@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<CityModel>
+
+@{  ViewBag.Title = "City Page"; }
+
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th>
+                Settings
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+
+        @Html.DisplayFor(modelItem => item.CityName)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        People names
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ol>
+                            @foreach (var name in item.PeopleList)
+                            {
+                                <li>
+                                    @Html.DisplayFor(model => name.FullName)
+                                </li>
+                            }
+                        </ol>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </td>
+
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.CityId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.CityId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.CityId">Delete</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>

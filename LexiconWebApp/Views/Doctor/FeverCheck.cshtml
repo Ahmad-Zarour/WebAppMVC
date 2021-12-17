@@ -1,0 +1,25 @@
+﻿
+@model FeverCheckerModel
+
+@{
+    ViewBag.Title = "Check Your temperature";
+}
+
+<h1>@ViewBag.Title </h1>
+<br />
+<h3>What is your temperature rightnow </h3>
+
+@if (ViewBag.message == null)
+{
+    <form asp-controller="Doctor" asp-action="FeverCheck" method="post">
+
+        <label>Your temperature : </label>
+        <input type="number" Name="temperature" />
+        <input type="submit" value="Check" />
+    </form>
+}
+else
+{
+    <p>@ViewBag.message</p>
+}
+

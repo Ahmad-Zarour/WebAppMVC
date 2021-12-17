@@ -1,0 +1,39 @@
+﻿
+html {
+    font-family: sans-serif;
+    margin: 5px auto;
+    padding: 0;
+    max-width: 1024px;
+}
+
+nav {
+    background-color: deepskyblue;
+    border:solid 2px black;
+    border-radius : 10px;
+}
+
+img {
+    max-block-size: 50px;
+    padding: 10px 20px 5px 0px;
+}
+nav ul {
+    list-style-type: none;
+    display: inline;
+    text-align: center;
+    width: 100%;
+}
+ul li {
+    display: inline-block;
+    font-family :'Agency FB';
+    font-size :larger;
+    padding: 2px;
+    margin: 1px;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    background-color: palevioletred;
+    padding: 15px 0px;
+    position: relative;
+}
