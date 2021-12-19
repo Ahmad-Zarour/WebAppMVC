@@ -5,14 +5,28 @@
 <head>
     <link href="~/css/site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
+   
 </head>
 <body>
+    @if(!User.Identity.IsAuthenticated)
+            {
+                <p>Please login to your Account</p>
+            }
+    @if (User.IsInRole("Admin"))
+    {
+<p>Admin Access</p>}
+    @if (User.IsInRole("User"))
+    {
+<p>User Access</p>}
+
     <h1 class=" homePage">@ViewBag.Title</h1>
     <div>
-        <p> Weclome TO First Page on MVC</p>
-    <br />
-    <p> Learning ASP.NET MVC is so exciting.</p>
+        <p> Weclome To First Page on ASP.NET MVC</p>
+        <br />
+        <p> Learning ASP.NET MVC is so exciting.</p>
     </div>
+
+
 </body>
 </html>
 

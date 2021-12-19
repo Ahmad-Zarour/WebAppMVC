@@ -23,7 +23,7 @@ namespace LexiconWebApp.Data
 
         public DbSet<LanguageModel> Languages { get; set; }
         public DbSet<PersonLanguageModel> Person_Language { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; }
+        public  DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -141,7 +141,7 @@ namespace LexiconWebApp.Data
                   {
                       Id = userId,
                       Name = "User",
-                     NormalizedName = "USER"
+                      NormalizedName = "USER"
                   });
 
             PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
@@ -149,10 +149,10 @@ namespace LexiconWebApp.Data
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
                 Id = userId,
-                Email = "adm@adm.com",
-                NormalizedEmail = "ADM@ADM.COM",
-                UserName = "Adm",
-                NormalizedUserName = "ADM",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIM@ADMIN.COM",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
                 PasswordHash = hasher.HashPassword(null, "pass"),
                 FirstName = "First",
                 LastName = "Last"

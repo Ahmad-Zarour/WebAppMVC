@@ -4,14 +4,16 @@ using LexiconWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LexiconWebAppMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211219144339_Seeded Admin role and user")]
+    partial class SeededAdminroleanduser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,10 +99,10 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
+                            Id = "984db502-aaa1-471e-a9b6-bf3cb26d35da",
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "11d85f68-992c-4eca-8c77-63a11a89943f",
+                            ConcurrencyStamp = "0e75ddd2-8270-48df-8b5e-49284a1c06e9",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "First",
@@ -108,9 +110,9 @@ namespace LexiconWebAppMVC.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIM@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPP1GcFagNbvv9uLPOhI/B72I2sV6KusB99ZGWBli7DokUPyWxP3vQHt2z/3uq3G2Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGoaKiTzHvozQDAl235CZbPxMKGCiVjEBH7Zr5qyjQWmOv9D+UNyszXD9pCa4/4l7A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "282769e5-1f66-4f7c-9307-5e2251aba5c8",
+                            SecurityStamp = "61051327-2c61-475a-bc04-b2c2bee25faa",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -455,17 +457,10 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aa20607c-b5a8-4361-9519-2f36041c1689",
-                            ConcurrencyStamp = "3d6723af-7c4d-477c-9731-2b42b6570f41",
+                            Id = "1ba7eb3e-ebdb-47ed-a5bd-83c7217fbb5d",
+                            ConcurrencyStamp = "6d61d3cb-8154-4855-acf9-b105d8b65fda",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
-                            ConcurrencyStamp = "a51353a9-1992-4968-bb19-ca9259da2ca5",
-                            Name = "User",
-                            NormalizedName = "USER"
                         });
                 });
 
@@ -556,8 +551,8 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
-                            RoleId = "aa20607c-b5a8-4361-9519-2f36041c1689"
+                            UserId = "984db502-aaa1-471e-a9b6-bf3cb26d35da",
+                            RoleId = "1ba7eb3e-ebdb-47ed-a5bd-83c7217fbb5d"
                         });
                 });
 

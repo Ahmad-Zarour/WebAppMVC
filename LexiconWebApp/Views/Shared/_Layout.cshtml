@@ -35,7 +35,8 @@
                     <li>
                         <a asp-controller="People" asp-action="PeopleList">People</a>
                     </li>
-
+                    @if (User.IsInRole("Admin"))
+                    {
                     <li>
                         <a asp-controller="Country" asp-action="Index">Country</a>
                     </li>
@@ -46,9 +47,11 @@
                     <li>
                         <a asp-controller="Language" asp-action="Index">Language</a>
                     </li>
+                    }
                     <li id="login">
                         <partial name="_LoginPartial" />
                     </li>
+                    
 
                 </ul>
             </div>
