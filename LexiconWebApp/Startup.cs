@@ -2,7 +2,7 @@ using LexiconWebApp.Data;
 using LexiconWebApp.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using JavaScriptEngineSwitcher.V8;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using React.AspNet;
+
 
 namespace LexiconWebApp
 {
@@ -28,7 +33,9 @@ namespace LexiconWebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(option => option.DefaultEngineName = V8JsEngine.EngineName).AddV8();
             services.AddControllersWithViews();
             services.AddMvc()
             .AddSessionStateTempDataProvider();
@@ -51,7 +58,10 @@ namespace LexiconWebApp
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseReact(config =>
+            {
+               // config.AddScript("file");
+            });
             app.UseStaticFiles();
             app.UseRouting();
             app.UseSession();
