@@ -1,5 +1,6 @@
 ﻿using LexiconWebApp.Data;
 using LexiconWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +9,8 @@ using System.Linq;
 
 namespace LexiconMVC_Data.Controllers
 {
+
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,6 +20,7 @@ namespace LexiconMVC_Data.Controllers
             _context = context;
         }
 
+        
         public IActionResult PeopleList()
         {
 
@@ -25,12 +29,20 @@ namespace LexiconMVC_Data.Controllers
             return View(people);
         }
 
-       
+        public IActionResult Index()
+        {
+
+            List<PersonModel> people = _context.People.ToList();
+
+            return View(people);
+        }
+
+
 
         [HttpGet]
         public IActionResult GetListPerson()
         {
-            List<PersonModel> people = _context.People .Include(person => person.City)
+            List<PersonModel> people = _context.People.Include(person => person.City)
                 .Where(person => person.CityId == person.City.CityId).ToList();
             return PartialView("_partialPeopleList",people);
         }

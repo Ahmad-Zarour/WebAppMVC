@@ -46,6 +46,12 @@ namespace LexiconWebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+
+
+            [Required]
+            [Display(Name = "Is Admin")]
+            public bool UserType { get; set; }
+
             [Required]
             [StringLength(45, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "First Name")]
@@ -91,11 +97,18 @@ namespace LexiconWebApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email,FirstName = Input.FirstName,
-                LastName = Input.LastName,BirthDate = Input.BirthDate};
+                LastName = Input.LastName,BirthDate = Input.BirthDate,UserTypes =Input.UserType};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+
+                    if(user.UserTypes == true)
+                     await _userManager.AddToRoleAsync(user, "Admin");
+                    else
+                     await _userManager.AddToRoleAsync(user, "User");
+
+
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

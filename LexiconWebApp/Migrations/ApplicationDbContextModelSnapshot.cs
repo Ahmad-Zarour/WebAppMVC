@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LexiconWebAppMVC.Migrations
+namespace LexiconWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -43,11 +43,13 @@ namespace LexiconWebAppMVC.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -82,6 +84,9 @@ namespace LexiconWebAppMVC.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<bool>("UserTypes")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -97,22 +102,43 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
+                            Id = "a5be279b-deb2-4bd3-82db-dfb40cfdbd3b",
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "11d85f68-992c-4eca-8c77-63a11a89943f",
+                            ConcurrencyStamp = "be48d855-947e-449f-8e99-0b93f3abd71a",
                             Email = "admin@admin.com",
-                            EmailConfirmed = false,
-                            FirstName = "First",
-                            LastName = "Last",
+                            EmailConfirmed = true,
+                            FirstName = "FirstAdmin",
+                            LastName = "LastAdmin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIM@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPP1GcFagNbvv9uLPOhI/B72I2sV6KusB99ZGWBli7DokUPyWxP3vQHt2z/3uq3G2Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIF5paKxxg6kzjgV8C94skifz9IlWTOc58zuQ3wEFfQ6Y5KGDSEj0zrKRTNQNPqxhw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "282769e5-1f66-4f7c-9307-5e2251aba5c8",
+                            SecurityStamp = "10b88023-0f8e-4606-97bf-c4cc5c1f1f1d",
                             TwoFactorEnabled = false,
-                            UserName = "Admin"
+                            UserName = "admin",
+                            UserTypes = false
+                        },
+                        new
+                        {
+                            Id = "e523b459-b0f2-4cef-ae6e-332c76fd2b2d",
+                            AccessFailedCount = 0,
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "9f2f3175-83ce-43b6-8b16-837848459aaa",
+                            Email = "user@user.com",
+                            EmailConfirmed = true,
+                            FirstName = "FirstUser",
+                            LastName = "LastUser",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@USER.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEQqaSOG1EnRbDeoaWRWOb0mSiC/c8hgPOvySecQhZOPBXjpStSldQcIikvXoTJusg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a3841611-5526-452e-8021-3ef12d2e67d9",
+                            TwoFactorEnabled = false,
+                            UserName = "user",
+                            UserTypes = false
                         });
                 });
 
@@ -455,15 +481,15 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aa20607c-b5a8-4361-9519-2f36041c1689",
-                            ConcurrencyStamp = "3d6723af-7c4d-477c-9731-2b42b6570f41",
+                            Id = "a89542bf-f929-405b-8ba0-1acde894cd18",
+                            ConcurrencyStamp = "bd5d258e-051b-4b01-a88d-32cf3e8d0c6c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
-                            ConcurrencyStamp = "a51353a9-1992-4968-bb19-ca9259da2ca5",
+                            Id = "c0ab4a4d-8bfa-4f8c-83fb-bb78e25b698e",
+                            ConcurrencyStamp = "466031b0-71b8-4bb8-8dff-dbd3ac270d31",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -556,8 +582,13 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ab3cfbf3-ca0d-4fdc-b6ac-be19d4b28af0",
-                            RoleId = "aa20607c-b5a8-4361-9519-2f36041c1689"
+                            UserId = "a5be279b-deb2-4bd3-82db-dfb40cfdbd3b",
+                            RoleId = "a89542bf-f929-405b-8ba0-1acde894cd18"
+                        },
+                        new
+                        {
+                            UserId = "e523b459-b0f2-4cef-ae6e-332c76fd2b2d",
+                            RoleId = "c0ab4a4d-8bfa-4f8c-83fb-bb78e25b698e"
                         });
                 });
 

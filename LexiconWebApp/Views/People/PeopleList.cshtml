@@ -5,7 +5,7 @@
     <script src="~/js/PersonScript.js" asp-append-version="true"></script>
 }
 
-<h1>People Index</h1>
+<h1>People Page</h1>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,44 +13,45 @@
 </head>
 <body>
 
-    @*
+
         <div>
             <form asp-action="PeopleList" method="post" role="form">
                 <h3>Find Person by Name or City</h3>
-                <label asp-for="Filter"> Search here</label>
-                <input asp-for="Filter" required />
-                <input type="submit" name="btnFilter" value="Find" />
+                <label> Search here</label>
+                <input required />
+               
+                <input type="submit" name="btnFilter" value="Find" onclick="FindPersonById()" />
 
 
             </form>
         </div>
         <br />
         <div>
-            <form asp-action="CreatePerson" method="post" role="form">
+            @* <form asp-action="CreatePerson" method="post" role="form">
 
-                <div>
-                    <h4><b>Add New Person</b></h4>
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" />
-                    <br />
-                    <span style="color:red" asp-validation-for="Name"></span>
+             <div>
+                <h4><b>Add New Person</b></h4>
+                <label asp-for="Name"></label>
+                <input asp-for="Name" />
+                <br />
+                <span style="color:red" asp-validation-for="Name"></span>
 
-                    <label asp-for="PhoneNumber"></label>
-                    <input asp-for="PhoneNumber" />
-                    <br />
-                    <span style="color:red" asp-validation-for="PhoneNumber"></span>
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" />
+                <br />
+                <span style="color:red" asp-validation-for="PhoneNumber"></span>
 
-                    <label asp-for="City"></label>
-                    <input asp-for="City" />
-                    <br />
-                    <span style="color:red" asp-validation-for="City"></span>
-                </div>
-                <input type="submit" name="btnCreatePerson" value="Add New Person" />
+                <label asp-for="City"></label>
+                <input asp-for="City" />
+                <br />
+                <span style="color:red" asp-validation-for="City"></span>
+            </div>
+            <input type="submit" name="btnCreatePerson" value="Add New Person" />
 
-            </form>
+            </form> *@ 
         </div>
         <br />
-        correcting the partial View **@
+        
 
     <div class="container">
         <div class="row row-cols-md-5 justify-content-md-between">

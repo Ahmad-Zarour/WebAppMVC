@@ -1,7 +1,7 @@
 class PersonBox extends React.Component {
     render() {
         return (
-            <div className="personBox">Hello, world! I am a person box!</div>
+            <div className="personBox">Hello React ,Page under construction</div>
         );
     }
 }

@@ -34,6 +34,7 @@ namespace LexiconWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            services.AddScoped<IPersonModelRepo, PersonModelRepo>();
             services.AddReact();
             services.AddJsEngineSwitcher(option => option.DefaultEngineName = V8JsEngine.EngineName).AddV8();
             services.AddControllersWithViews();

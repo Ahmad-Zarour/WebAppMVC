@@ -17,7 +17,7 @@ namespace LexiconWebApp.Models
         {
 
         }
-        public Person(int id ,string name , string phoneNumber , string city)
+        public Person(int id, string name, string phoneNumber, string city)
         {
             this._id = id;
             Name = name;

@@ -1,11 +1,10 @@
-﻿@model IEnumerable<LanguageModel>
+﻿
+@model IEnumerable<CityModel>
 @inject UserManager<ApplicationUser> UserManager;
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewBag.Title = "City Page"; }
 
-<h1>Language</h1>
+<h1>@ViewBag.Title</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LanguageName)
+                @Html.DisplayNameFor(model => model.CityName)
             </th>
             <th>
-                Setting will be added soon
+                Settings
             </th>
             <th></th>
         </tr>
@@ -29,8 +28,8 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LanguageName)
 
+                        @Html.DisplayFor(modelItem => item.CityName)
                         <table class="table">
                             <thead>
                                 <tr>
@@ -43,10 +42,10 @@
                                 <tr>
                                     <td>
                                         <ol>
-                                            @foreach (var item2 in item.Person_Language)
+                                            @foreach (var name in item.PeopleList)
                                             {
                                                 <li>
-                                                    @Html.DisplayFor(model => item2.Person.FullName)
+                                                    @Html.DisplayFor(model => name.FullName)
                                                 </li>
                                             }
                                         </ol>
@@ -54,14 +53,18 @@
                                 </tr>
                             </tbody>
                         </table>
+
+
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.LanguageId">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.LanguageId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.CityId">Edit</a> |
+                        |
+                        <a asp-controller="City" asp-action="DeleteCity" >Delete</a>
                     </td>
                 </tr>
             }
             }
+
         </tbody>
 </table>

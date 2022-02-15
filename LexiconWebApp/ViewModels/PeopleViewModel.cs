@@ -13,9 +13,6 @@ namespace LexiconWebApp.Models
 
 
         public PeopleViewModel()
-
-
-
         {
             PeopleListViewModel = new List<PersonModel>();
         }

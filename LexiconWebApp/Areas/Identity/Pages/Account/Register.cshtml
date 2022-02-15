@@ -45,21 +45,31 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.UserType"></label>
+                <div class="form-check-input">
+                    <input asp-for="Input.UserType" />
+
+                </div>
+                <p>the default role is User, choose IsAdmin for admin role while registration or change it later on the homepage by 'Change role' button</p>
+                </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to register.</h4>
+            <h4>Registration Page.</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
+                                    <p>
+                                        In the registration form, all fields are required
+                                    </p>
                     </div>
                 }
                 else

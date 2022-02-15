@@ -8,7 +8,7 @@
 <body>
     <header>
         <nav>
-            <div class="container">
+            <div class="container-md">
                 <ul>
                     <li>
                         <img src="~/img/Logo.png" alt="Page Logo" />
@@ -33,26 +33,24 @@
                     </li>
 
                     <li>
-                        <a asp-controller="People" asp-action="PeopleList">People</a>
+                        <a asp-controller="People" asp-action="PeopleList">Old List</a>
                     </li>
-
                     <li>
-                        <a asp-controller="React" asp-action="Index">React</a>
+                        <a asp-controller="PersonModel" asp-action="Index">People</a>
                     </li>
-
-                    @if (User.IsInRole("Admin"))
-                    {
                         <li>
                             <a asp-controller="Country" asp-action="Index">Country</a>
                         </li>
 
                         <li>
-                            <a asp-controller="City" asp-action="Index">City</a>
+                            <a asp-controller="City" asp-action="City">City</a>
                         </li>
                         <li>
                             <a asp-controller="Language" asp-action="Index">Language</a>
                         </li>
-                    }
+                        <li>
+                            <a asp-controller="React" asp-action="Index">React</a>
+                        </li>
                     <li id="login">
                         <partial name="_LoginPartial" />
                     </li>

@@ -22,16 +22,12 @@ namespace LexiconWebApp.Models
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
 
-        //[Required]
-        //[DisplayName("City")]
-        //public string City { get; set; }
 
-        // Replace string City in Person with class City.
 
-        [Required]
         [DisplayName("City Id")]
-        public CityModel City { get; set; }
+       
         public int CityId { get; set; }
+        public CityModel City { get; set; }
 
         public List<PersonLanguageModel> Person_Language { get; set; }
     }

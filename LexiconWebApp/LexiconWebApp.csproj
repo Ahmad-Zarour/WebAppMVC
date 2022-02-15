@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20211206211305_Init.cs" />
-    <Compile Remove="Migrations\20211206211305_Init.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

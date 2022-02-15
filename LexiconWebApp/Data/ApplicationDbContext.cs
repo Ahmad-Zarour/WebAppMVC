@@ -23,17 +23,21 @@ namespace LexiconWebApp.Data
 
         public DbSet<LanguageModel> Languages { get; set; }
         public DbSet<PersonLanguageModel> Person_Language { get; set; }
-        public  DbSet<ApplicationUser> Users { get; set; }
+       // public  DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // relationsship
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<PersonLanguageModel>().HasKey(p_l => new { p_l.PersonId, p_l.LanguageId });
+            modelBuilder.Entity<PersonLanguageModel>()
+                .HasKey(p_l => new { p_l.PersonId, p_l.LanguageId });
 
-            modelBuilder.Entity<PersonLanguageModel>().HasOne(p => p.Person).WithMany(p_l => p_l.Person_Language)
+            modelBuilder.Entity<PersonLanguageModel>()
+                .HasOne(p => p.Person).WithMany(p_l => p_l.Person_Language)
                 .HasForeignKey(pi => pi.PersonId);
 
-            modelBuilder.Entity<PersonLanguageModel>().HasOne(l => l.Language).WithMany(p_l => p_l.Person_Language)
+            modelBuilder.Entity<PersonLanguageModel>()
+                .HasOne(l => l.Language).WithMany(p_l => p_l.Person_Language)
                 .HasForeignKey(li => li.LanguageId);
 
 
@@ -125,25 +129,25 @@ namespace LexiconWebApp.Data
                 new PersonLanguageModel { PersonId = 9, LanguageId = 4 });
 
 
-            string roleId = Guid.NewGuid().ToString();
+
+           
+            
             string userId = Guid.NewGuid().ToString();
+            string userId2 = Guid.NewGuid().ToString();
+            string adminRoleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
 
 
-            modelBuilder.Entity<IdentityRole>().HasData(
-                new IdentityRole 
-                { Id = roleId, 
+            /// seeding Admin rol and an account 
+            /// 
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole 
+                { 
+                    Id = adminRoleId, 
                     Name = "Admin", 
-                    NormalizedName = "ADMIN" });
+                    NormalizedName = "ADMIN" 
+                });
 
-            modelBuilder.Entity<IdentityRole>().HasData(
-                  new IdentityRole
-                  {
-                      Id = userId,
-                      Name = "User",
-                      NormalizedName = "USER"
-                  });
-
+            
             PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
 
             modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
@@ -153,17 +157,47 @@ namespace LexiconWebApp.Data
                 NormalizedEmail = "ADMIM@ADMIN.COM",
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                PasswordHash = hasher.HashPassword(null, "pass"),
-                FirstName = "First",
-                LastName = "Last"
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "adminpass"),
+                FirstName = "FirstAdmin",
+                LastName = "LastAdmin"
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = roleId,
-                UserId = userId
+                UserId = userId,
+                RoleId = adminRoleId
+
             });
 
+            // seeding noral user rol and account
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = userRoleId,
+                Name = "User",
+                NormalizedName = "USER"
+            });
+
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = userId2,
+                Email = "user@user.com",
+                NormalizedEmail = "USER@USER.COM",
+                UserName = "user",
+                NormalizedUserName = "USER",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "userpass"),
+                FirstName = "FirstUser",
+                LastName = "LastUser"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = userId2,
+                RoleId = userRoleId
+
+            });
         }
 
 

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LexiconWebAppMVC.Migrations
+namespace LexiconWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211215180622_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20220214002315_DbInti")]
+    partial class DbInti
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,11 +45,13 @@ namespace LexiconWebAppMVC.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -84,6 +86,9 @@ namespace LexiconWebAppMVC.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<bool>("UserTypes")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -95,6 +100,48 @@ namespace LexiconWebAppMVC.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a5be279b-deb2-4bd3-82db-dfb40cfdbd3b",
+                            AccessFailedCount = 0,
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "be48d855-947e-449f-8e99-0b93f3abd71a",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = true,
+                            FirstName = "FirstAdmin",
+                            LastName = "LastAdmin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIM@ADMIN.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIF5paKxxg6kzjgV8C94skifz9IlWTOc58zuQ3wEFfQ6Y5KGDSEj0zrKRTNQNPqxhw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "10b88023-0f8e-4606-97bf-c4cc5c1f1f1d",
+                            TwoFactorEnabled = false,
+                            UserName = "admin",
+                            UserTypes = false
+                        },
+                        new
+                        {
+                            Id = "e523b459-b0f2-4cef-ae6e-332c76fd2b2d",
+                            AccessFailedCount = 0,
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "9f2f3175-83ce-43b6-8b16-837848459aaa",
+                            Email = "user@user.com",
+                            EmailConfirmed = true,
+                            FirstName = "FirstUser",
+                            LastName = "LastUser",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@USER.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEQqaSOG1EnRbDeoaWRWOb0mSiC/c8hgPOvySecQhZOPBXjpStSldQcIikvXoTJusg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a3841611-5526-452e-8021-3ef12d2e67d9",
+                            TwoFactorEnabled = false,
+                            UserName = "user",
+                            UserTypes = false
+                        });
                 });
 
             modelBuilder.Entity("LexiconWebApp.Models.CityModel", b =>
@@ -432,6 +479,22 @@ namespace LexiconWebAppMVC.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a89542bf-f929-405b-8ba0-1acde894cd18",
+                            ConcurrencyStamp = "bd5d258e-051b-4b01-a88d-32cf3e8d0c6c",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "c0ab4a4d-8bfa-4f8c-83fb-bb78e25b698e",
+                            ConcurrencyStamp = "466031b0-71b8-4bb8-8dff-dbd3ac270d31",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -517,6 +580,18 @@ namespace LexiconWebAppMVC.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "a5be279b-deb2-4bd3-82db-dfb40cfdbd3b",
+                            RoleId = "a89542bf-f929-405b-8ba0-1acde894cd18"
+                        },
+                        new
+                        {
+                            UserId = "e523b459-b0f2-4cef-ae6e-332c76fd2b2d",
+                            RoleId = "c0ab4a4d-8bfa-4f8c-83fb-bb78e25b698e"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

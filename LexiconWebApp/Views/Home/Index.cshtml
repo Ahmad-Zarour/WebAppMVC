@@ -8,17 +8,31 @@
    
 </head>
 <body>
-    @if(!User.Identity.IsAuthenticated)
-            {
-                <p>Please login to your Account</p>
-            }
-    @if (User.IsInRole("Admin"))
-    {
-<p>Admin Access</p>}
-    @if (User.IsInRole("User"))
-    {
-<p>User Access</p>}
 
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>Please login to your Account</p>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("Admin"))
+        {
+            <p>Admin Access</p>}
+        @if (User.IsInRole("User"))
+        {
+            <p>User Access</p>}
+<div class="card-footer">
+    @inject UserManager<ApplicationUser> UserManager;
+
+    <form method="post" asp-controller="Home" asp-action="ChangeRoles" class="mt-0">
+
+        <button type="submit" class="btn btn-primary">Change role</button>
+        <h5>@ViewBag.Message</h5>
+    </form>
+    
+   
+</div>
+    }
     <h1 class=" homePage">@ViewBag.Title</h1>
     <div>
         <p> Weclome To First Page on ASP.NET MVC</p>

@@ -19,10 +19,26 @@ namespace LexiconWebApp.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult City()
         {
             var citiesWithPeople = (from data in _context.Cities.Include("PeopleList") select data).ToList();
             return View(citiesWithPeople);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCity(string cityId)
+        {
+
+            if (_context.People.Any(ci => ci.CityId == int.Parse(cityId)))
+            {
+                ViewBag.Error = "unable to delete the city , city added for existing people";
+            }
+            else
+            {
+                _context.Cities.RemoveRange(_context.Cities.Where(cr => cr.CityId == int.Parse(cityId)));
+                _context.SaveChanges();
+            }
+            return RedirectToAction("City");
         }
     }
 }
