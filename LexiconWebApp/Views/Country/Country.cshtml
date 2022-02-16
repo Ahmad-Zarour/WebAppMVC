@@ -1,11 +1,12 @@
 ﻿
-@model CityViewModel
+@model IEnumerable<CountryModel>
 @inject UserManager<ApplicationUser> UserManager;
 
-@{ ViewBag.Title = "City Page"; }
+@{
+    ViewData["Title"] = "Country";
+}
 
-<h1>@ViewBag.Title</h1>
-
+<h1>Country Page</h1>
 @if (!User.Identity.IsAuthenticated)
 {
     <p>
@@ -15,23 +16,13 @@
 @if (User.IsInRole("User"))
 {<p>Only admin account has access to this page </p>
 }
-
 @if (User.IsInRole("Admin"))
 {
     <div>
-        <form asp-controller="City" asp-action="AddCity">
-            City Name:
-            <input type="text" name="cityName" />
-
-            for the Country
-
-            <select name="countryId">
-                @foreach (var x in Model.Countries)
-                {
-                    <option value=@x.CountryId> @x.CountryName</option>
-
-                }
-            </select>
+        <h3>Add New Country</h3>
+        <form asp-controller="Country" asp-action="AddCountry">
+            Country Name:
+            <input type="text" name="countryName" />
             <input class="btn btn-outline-primary" type="submit" value="Add" />
 
         </form>
@@ -41,7 +32,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cities)
+                    @Html.DisplayNameFor(model => model.CountryName)
                 </th>
                 <th>
                     Settings
@@ -52,18 +43,16 @@
         <tbody>
             @if (User.Identity.IsAuthenticated)
             {
-                @foreach (var item in Model.Cities)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-
-                            @Html.DisplayFor(modelItem => item.CityName)
+                            @Html.DisplayFor(modelItem => item.CountryName)
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>
-                                            People names
-
+                                            City names
                                         </th>
                                     </tr>
                                 </thead>
@@ -71,10 +60,10 @@
                                     <tr>
                                         <td>
                                             <ol>
-                                                @foreach (var name in item.PeopleList)
+                                                @foreach (var name in item.Cities)
                                                 {
                                                     <li>
-                                                        @Html.DisplayFor(model => name.FullName)
+                                                        @Html.DisplayFor(model => name.CityName)
                                                     </li>
                                                 }
                                             </ol>
@@ -82,54 +71,35 @@
                                     </tr>
                                 </tbody>
                             </table>
-
-
                         </td>
-
                         <td>
-
-
-                            <form asp-controller="City" asp-action="DeleteCity">
-                                <input type="hidden" value="@item.CityId" name="cityId" />
-                                <input class="btn btn-danger text-white" type="submit" value="Delete" />
-                                <p>Note: You can't delete a city that has people in'</p>
-                            </form>
-
-
-
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <form asp-controller="Country" asp-action="DeleteCountry">
+                                    <input type="hidden" value="@item.CountryId" name="countryId" />
+                                    <input class="btn btn-danger text-white" type="submit" value="Delete" />
+                                    <p>Note: You can't delete a Country that has City in'</p>
+                                </form>
+                            }
                         </td>
                     </tr>
-
-
                 }
             }
-
         </tbody>
     </table>
+
     <div>
-        <h2>Edit City Details </h2>
-        <form asp-controller="City" asp-action="EditCity">
-            <select name="cityId">
-                @foreach (var x in Model.Cities)
-                {
-                    <option value=@x.CityId> @x.CityName</option>
-                }
-            </select>
-            The City:
-            <input type="text" name="cityName" />
-
-            of Country:
-
+        <h2>Edit Country Details </h2>
+        <form asp-controller="Country" asp-action="EditCountry">
             <select name="countryId">
-                @foreach (var x in Model.Countries.GroupBy(m => m.CountryId).Select(g => g.First()))
+                @foreach (var x in Model)
                 {
                     <option value=@x.CountryId> @x.CountryName</option>
-
                 }
             </select>
+            The Country:
+            <input type="text" name="countryName" />
             <input class="btn btn-outline-primary" value="Edit" type="submit" />
         </form>
     </div>
 }
-
-

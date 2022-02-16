@@ -10,6 +10,12 @@
 
 </head>
 <body>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>
+            Login or create an account to get access to this page
+        </p>
+    }
     @if (User.Identity.IsAuthenticated)
     {
         <div class="row">
@@ -79,13 +85,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <label >New Name </label>
+                            <label>New Name </label>
                             <input type="text" name="fullName" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label >New PhoneNumber </label>
+                            <label>New PhoneNumber </label>
                             <input type="text" name="phNumber" />
                         </td>
                     </tr>

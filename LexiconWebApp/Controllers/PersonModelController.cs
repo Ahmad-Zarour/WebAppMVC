@@ -30,7 +30,7 @@ namespace LexiconWebApp.Controllers
         {
             List<PersonModel> people = _applicationDbContext.People.Include(person => person.City)
                 .Where(person => person.CityId == person.City.CityId).ToList();
-           // return PartialView("_partialPeopleList", people);
+          
             return View(people);
         }
 

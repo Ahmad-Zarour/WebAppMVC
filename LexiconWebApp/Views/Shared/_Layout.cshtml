@@ -32,25 +32,28 @@
                         <a asp-controller="GuessingGame" asp-action="GuessingGame"> Guessing Game</a>
                     </li>
 
-                    <li>
-                        <a asp-controller="People" asp-action="PeopleList">Old List</a>
-                    </li>
+                    @* <li>
+            <a asp-controller="People" asp-action="PeopleList">Old List</a>
+        </li>*@
                     <li>
                         <a asp-controller="PersonModel" asp-action="Index">People</a>
                     </li>
-                        <li>
-                            <a asp-controller="Country" asp-action="Index">Country</a>
-                        </li>
+                    <li>
+                        <a asp-controller="Country" asp-action="Country">Country</a>
+                    </li>
 
-                        <li>
-                            <a asp-controller="City" asp-action="City">City</a>
-                        </li>
-                        <li>
-                            <a asp-controller="Language" asp-action="Index">Language</a>
-                        </li>
-                        <li>
-                            <a asp-controller="React" asp-action="Index">React</a>
-                        </li>
+                    <li>
+                        <a asp-controller="City" asp-action="City">City</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Language" asp-action="Language">Language</a>
+                    </li>
+                    <li>
+                        <a asp-controller="PersonLanguage" asp-action="PersonLanguage">Person Language</a>
+                    </li>
+                    <li>
+                        <a asp-controller="React" asp-action="Index">React</a>
+                    </li>
                     <li id="login">
                         <partial name="_LoginPartial" />
                     </li>

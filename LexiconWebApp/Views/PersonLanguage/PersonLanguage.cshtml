@@ -1,0 +1,38 @@
+﻿@model PersonLanguageViewModel
+@inject UserManager<ApplicationUser> UserManager;
+
+<h1>People and Languages Page</h1>
+
+@if (! User.Identity.IsAuthenticated)
+{
+    <p>
+        Login or create an account to get access to this page
+    </p>
+}
+@if (User.IsInRole("User"))
+{<p>Only admin account has access to this page </p>
+}
+
+@if (User.IsInRole("Admin"))
+{
+<h4>Add/Delete a Language to a Person</h4>
+<form>
+    Select a Language
+    <select name="languageId">
+        @foreach (var language in Model.Languages)
+        {
+            <option value=@language.LanguageId> @language.LanguageName</option>
+        }
+    </select>
+    for the person with name 
+    <select name="personId">
+        @foreach (var person in Model.People)
+        {
+            <option value=@person.PersonId> @person.FullName</option>
+        }
+    </select>
+    <input asp-controller="PersonLanguage" asp-action="AddLanguageToPerson" class="btn btn-outline-primary" type="submit" value="Add" />
+    <input asp-controller="PersonLanguage" asp-action="DeleteLanguageToPerson" class="btn btn-danger text-white" type="submit" value="Remove" />
+
+</form>
+}

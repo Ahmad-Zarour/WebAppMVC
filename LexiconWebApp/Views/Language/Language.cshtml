@@ -1,0 +1,101 @@
+﻿@model IEnumerable<LanguageModel>
+@inject UserManager<ApplicationUser> UserManager;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Language</h1>
+@if (!User.Identity.IsAuthenticated)
+{
+    <p>
+        Login or create an account to get access to this page
+    </p>
+}
+@if (User.IsInRole("User"))
+{<p>Only admin account has access to this page </p>
+}
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <h3>Add New Language</h3>
+        <form asp-controller="Language" asp-action="AddLanguage">
+            Language Name:
+            <input type="text" name="languageName" />
+            <input class="btn btn-outline-primary" type="submit" value="Add" />
+        </form>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LanguageName)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LanguageName)
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            People names
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <ol>
+                                                @foreach (var item2 in item.Person_Language)
+                                                {
+                                                    <li>
+                                                        @Html.DisplayFor(model => item2.Person.FullName)
+                                                    </li>
+                                                }
+                                            </ol>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <form asp-controller="Language" asp-action="DeleteLanguage">
+                                    <input type="hidden" value="@item.LanguageId" name="languageId" />
+                                    <input class="btn btn-danger text-white" type="submit" value="Delete" />
+                                    <p>Note: You can't delete a Language that has People in'</p>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                
+                 }
+        </tbody>
+    </table>
+    <div>
+        <h2>Edit Language  </h2>
+        <form asp-controller="Language" asp-action="EditLanguage">
+            <select name="languageId">
+                @foreach (var x in Model)
+                {
+                    <option value=@x.LanguageId> @x.LanguageName</option>
+                }
+            </select>
+            The Language :
+            <input type="text" name="languageName" />
+            <input class="btn btn-outline-primary" value="Edit" type="submit" />
+        </form>
+    </div>
+}

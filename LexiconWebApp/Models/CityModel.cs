@@ -23,9 +23,13 @@ namespace LexiconWebApp.Models
 
 		[Required]
 		[ForeignKey("CountryId")]
+
 		[DisplayName("Country Id")]
 		public int CountryId { get; set; }
+
 		public CountryModel Country { get; set; }
 		public List<PersonModel> PeopleList { get; set; }
+	
 	}
+	
 }
